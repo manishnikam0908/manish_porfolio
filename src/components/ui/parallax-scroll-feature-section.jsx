@@ -24,7 +24,7 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
       description: "A premium online gift curation platform featuring customized gift bundles, real-time inventory tracking, smooth checkout flow, and reactive shopping animations.",
       tags: ["React", "Tailwind CSS", "Node.js", "Framer Motion"],
       imageUrl: giftShopImg,
-      demoUrl: "#",
+      demoUrl: "https://gifts-bice.vercel.app/",
       bgColorDark: "#050e2d",
       bgColorLight: "#cbe3f7"
     },
@@ -35,7 +35,7 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
       description: "High-end street fashion web experience with dynamic filter systems, immersive product showcases, size configurators, and modern minimal aesthetics.",
       tags: ["React", "Tailwind CSS", "GSAP", "Vite"],
       imageUrl: clothesImg,
-      demoUrl: "#",
+      demoUrl: "https://clothswebsite-lilac.vercel.app/",
       bgColorDark: "#091747",
       bgColorLight: "#bddef7"
     },
@@ -46,7 +46,7 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
       description: "Interactive hypercar platform offering 360-degree vehicle customization, engine sound simulation, telemetry dashboards, and high-performance WebGL graphics.",
       tags: ["Three.js", "React", "WebGL", "Tailwind CSS"],
       imageUrl: carImg,
-      demoUrl: "#",
+      demoUrl: "https://car-website-sage.vercel.app/",
       bgColorDark: "#0c1d57",
       bgColorLight: "#b1d8f7"
     },
@@ -57,7 +57,7 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
       description: "AI-assisted task management suite with drag-and-drop Kanban boards, team analytics, timeline views, and real-time collaboration tools.",
       tags: ["TypeScript", "React", "Tailwind CSS", "Lucide"],
       imageUrl: projectManagerImg,
-      demoUrl: "#",
+      demoUrl: "https://project-manger-jgue.vercel.app/",
       bgColorDark: "#102366",
       bgColorLight: "#a6d3f7"
     },
@@ -68,7 +68,7 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
       description: "Rich, tactile digital brand experience for a specialty coffee house with online ordering, bean roast selectors, and interactive menu stories.",
       tags: ["React", "Framer Motion", "Tailwind CSS"],
       imageUrl: coffeeImg,
-      demoUrl: "#",
+      demoUrl: "https://coffestorecom-alpha.vercel.app/",
       bgColorDark: "#081640",
       bgColorLight: "#c3e1f7"
     },
@@ -79,7 +79,7 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
       description: "Interactive footwear marketplace featuring 3D product viewports, background removal photo tools, drop countdown timers, and seamless cart operations.",
       tags: ["React", "Python", "Tailwind CSS", "Three.js"],
       imageUrl: shoesImg,
-      demoUrl: "#",
+      demoUrl: "https://shoose-store.vercel.app/",
       bgColorDark: "#061233",
       bgColorLight: "#d0e7f7"
     }
@@ -168,6 +168,8 @@ export function ParallaxScrollFeatureSection({ themeMode = 'light' }) {
                   <div className="pt-2">
                     <a
                       href={project.demoUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
                       className={`inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-xs font-mono font-bold uppercase tracking-wider transition-all duration-300 shadow-md ${
                         isDark
                           ? 'bg-cyan-400 text-slate-950 hover:bg-cyan-300 hover:shadow-cyan-400/25'

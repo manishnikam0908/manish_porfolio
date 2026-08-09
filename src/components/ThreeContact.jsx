@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { FontLoader } from 'three/examples/jsm/loaders/FontLoader.js';
 import { TextGeometry } from 'three/examples/jsm/geometries/TextGeometry.js';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 export default function ThreeContact({ themeMode = 'light' }) {
   const containerRef = useRef(null);
@@ -69,16 +68,6 @@ export default function ThreeContact({ themeMode = 'light' }) {
       envMapIntensity: isDark ? 3.0 : 2.2,
     });
 
-    const accentMaterial = new THREE.MeshPhysicalMaterial({
-      color: new THREE.Color(isDark ? '#ffeb3b' : '#ff0055'),
-      emissive: new THREE.Color(isDark ? '#665200' : '#660022'),
-      emissiveIntensity: 0.4,
-      roughness: 0.04,
-      metalness: 0.2,
-      clearcoat: 1.0,
-      specularIntensity: 2.5,
-    });
-
     const modelGroup = new THREE.Group();
     scene.add(modelGroup);
 
@@ -130,20 +119,6 @@ export default function ThreeContact({ themeMode = 'light' }) {
         meMesh.castShadow = true;
         meMesh.receiveShadow = true;
         modelGroup.add(meMesh);
-
-        // Load 3D Accent Star/Sticker beside "me"
-        const gltfLoader = new GLTFLoader();
-        gltfLoader.load('/model/cnt.gltf', (gltf) => {
-          const cntModel = gltf.scene;
-          cntModel.traverse((child) => {
-            if (child.isMesh) {
-              child.material = accentMaterial;
-            }
-          });
-          cntModel.scale.set(0.85, 0.85, 0.85);
-          cntModel.position.set(meMesh.position.x + meWidth + 0.8, -1.4, 0.5);
-          modelGroup.add(cntModel);
-        }, undefined, () => {});
       },
       undefined,
       (err) => {
@@ -248,7 +223,6 @@ export default function ThreeContact({ themeMode = 'light' }) {
         container.removeChild(renderer.domElement);
       }
       contactMaterial.dispose();
-      accentMaterial.dispose();
     };
   }, [themeMode]);
 

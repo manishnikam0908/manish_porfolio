@@ -94,13 +94,6 @@ export default function HeroSection({ themeMode, setThemeMode }) {
               <ScrambleButtonText text="SKILLS" />
             </a>
             <a 
-              href="#certifications" 
-              onClick={(e) => scrollToSection(e, 'certifications')}
-              className="hover:opacity-75 transition-opacity cursor-pointer"
-            >
-              <ScrambleButtonText text="CERTIFICATES" />
-            </a>
-            <a 
               href="#projects" 
               onClick={(e) => scrollToSection(e, 'projects')}
               className="hover:opacity-75 transition-opacity cursor-pointer"

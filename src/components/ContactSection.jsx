@@ -77,7 +77,7 @@ export default function ContactSection({ themeMode = 'light' }) {
       {/* 2. MAIN 2-COLUMN GRID (LEFT: 3D "CONTACT ME" NAME, RIGHT: CONTACT CONTAINER) */}
       <div className="relative z-20 w-full max-w-7xl mx-auto px-6 sm:px-12 py-10 my-auto grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
         
-        {/* LEFT COLUMN: 3D WebGL "contact me" Cursive Canvas */}
+        {/* LEFT COLUMN: 3D WebGL "contact me" Inflated Tube Typography Canvas */}
         <div className="lg:col-span-6 flex flex-col items-center justify-center relative min-h-[450px] sm:min-h-[520px]">
           <div className="w-full h-full absolute inset-0 z-10 flex items-center justify-center pointer-events-auto">
             <ThreeContact themeMode={themeMode} />
