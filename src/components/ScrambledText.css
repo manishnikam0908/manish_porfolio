@@ -1,0 +1,10 @@
+.scrambled-text-block {
+  font-family: monospace;
+  will-change: transform;
+}
+
+.scrambled-char {
+  will-change: transform, opacity;
+  display: inline-block;
+  white-space: pre;
+}
