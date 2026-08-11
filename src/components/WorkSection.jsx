@@ -118,7 +118,7 @@ export default function WorkSection({ themeMode = 'light' }) {
             </div>
 
             {/* Bottom Secondary Paragraph */}
-            <div className={`font-mono text-lg sm:text-xl lg:text-2xl xl:text-3xl leading-[1.55] tracking-tight transition-colors ${
+            <div className={`font-mono text-lg sm:text-xl lg:text-2xl xl:text-3xl leading-[1.55] tracking-tight transition-colors flex flex-wrap items-center gap-3 ${
               isDark ? 'text-slate-300' : 'text-slate-700'
             }`}>
               <BlurText
@@ -127,8 +127,23 @@ export default function WorkSection({ themeMode = 'light' }) {
                 animateBy="words"
                 direction="bottom"
                 stepDuration={0.35}
-                className="font-mono text-lg sm:text-xl lg:text-2xl xl:text-3xl leading-[1.55]"
+                className="font-mono text-lg sm:text-xl lg:text-2xl xl:text-3xl leading-[1.55] inline"
               />
+              <a
+                href="/Manish_Nikam_Resume.docx"
+                download="Manish_Nikam_Resume.docx"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`inline-flex items-center gap-2 px-3.5 py-1 text-xs sm:text-sm font-mono font-bold uppercase tracking-wider border rounded transition-all cursor-pointer shadow-sm align-middle hover:scale-105 ${
+                  isDark 
+                    ? 'border-cyan-400/60 text-cyan-400 bg-cyan-950/40 hover:bg-cyan-400 hover:text-black' 
+                    : 'border-slate-800 text-slate-900 bg-slate-200/60 hover:bg-slate-900 hover:text-white'
+                }`}
+                title="Download Resume (Manish_Nikam_Resume.docx)"
+              >
+                <span>RESUME</span>
+                <span className="text-xs">↓</span>
+              </a>
             </div>
 
           </div>

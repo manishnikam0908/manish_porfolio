@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Mail, Sparkles, Check, Copy, Send } from 'lucide-react';
+import { Mail, Sparkles, Check, Copy, Send, Loader2 } from 'lucide-react';
 import ThreeContact from './ThreeContact';
 import { ScrambleButtonText } from './ui/text-scramble';
 
 export default function ContactSection({ themeMode = 'light' }) {
   const isDark = themeMode === 'dark';
   const [copied, setCopied] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({ name: '', email: '', subject: '', message: '' });
 
@@ -17,17 +18,50 @@ export default function ContactSection({ themeMode = 'light' }) {
     setTimeout(() => setCopied(false), 2000);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setSubmitted(true);
-    
-    const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(formData.subject || 'Portfolio Contact Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
-    window.location.href = mailtoUrl;
+    setIsSubmitting(true);
 
-    setTimeout(() => {
-      setSubmitted(false);
-      setFormData({ name: '', email: '', subject: '', message: '' });
-    }, 4000);
+    try {
+      // FormSubmit sends messages directly to manishnikam0908@gmail.com without extra keys
+      const response = await fetch(`https://formsubmit.co/ajax/${emailAddress}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json"
+        },
+        body: JSON.stringify({
+          name: formData.name,
+          email: formData.email,
+          _subject: formData.subject || `New Portfolio Message from ${formData.name}`,
+          message: formData.message,
+          _template: "table",
+          _captcha: "false"
+        })
+      });
+
+      const result = await response.json();
+
+      if (response.ok || result.success === "true" || result.success === true) {
+        setSubmitted(true);
+        setFormData({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSubmitted(false), 5000);
+      } else {
+        // Fallback: Open mail client if needed
+        const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+        window.location.href = mailtoUrl;
+        setSubmitted(true);
+        setTimeout(() => setSubmitted(false), 4000);
+      }
+    } catch (error) {
+      // Fallback to mailto
+      const mailtoUrl = `mailto:${emailAddress}?subject=${encodeURIComponent(formData.subject || 'Portfolio Inquiry')}&body=${encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`)}`;
+      window.location.href = mailtoUrl;
+      setSubmitted(true);
+      setTimeout(() => setSubmitted(false), 4000);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -163,10 +197,12 @@ export default function ContactSection({ themeMode = 'light' }) {
             <div className="pt-2">
               <button
                 type="submit"
-                disabled={submitted}
+                disabled={submitted || isSubmitting}
                 className={`px-8 py-3.5 rounded-full border font-sans font-medium text-sm transition-all duration-300 flex items-center justify-center gap-2 shadow-lg ${
                   submitted
                     ? 'bg-green-600 border-green-400 text-white'
+                    : isSubmitting
+                    ? 'opacity-80 cursor-wait bg-cyan-600/30 border-cyan-400 text-cyan-300'
                     : isDark
                     ? 'bg-transparent border-white text-white hover:bg-white hover:text-slate-950 active:scale-95'
                     : 'bg-transparent border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white active:scale-95'
@@ -176,6 +212,11 @@ export default function ContactSection({ themeMode = 'light' }) {
                   <>
                     <Check className="w-4 h-4" />
                     <span>Message Sent!</span>
+                  </>
+                ) : isSubmitting ? (
+                  <>
+                    <Loader2 className="w-4 h-4 animate-spin text-cyan-400" />
+                    <span>Sending...</span>
                   </>
                 ) : (
                   <>
